@@ -14,7 +14,9 @@ class SmartRequests(object):
 
     def __init__(self, domain, username, password):
         self.domain = domain
-        self.session = requests.session(headers=self.headers, auth=(username, password))
+        self.session = requests.Session()
+        self.session.auth = (username, password)
+        self.session.headers.update(self.headers)
 
     def _url(self, path):
         return '%s%s' % (self.domain, path)
