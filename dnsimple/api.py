@@ -65,11 +65,11 @@ class Domain(object):
 
     @simple_cached_property
     def records(self):
-        records = self.dnsimple.requests.json_get('/domains/%s/records' % self.id)
+        records = self.dnsimple.requests.json_get('/domains/%s/records' % self.name)
         return dict([(data['record']['id'], Record(self, data['record'])) for data in records])
 
     def delete(self):
-        return self.dnsimple.requests.delete('/domains/%s.json' % self.id)
+        return self.dnsimple.requests.delete('/domains/%s.json' % self.name)
 
 
 class DNSimple(object):
